@@ -17,7 +17,7 @@ namespace Kdbndp.EntityFrameworkCore.KingbaseES.Internal
     public static class KdbndpStrings
     {
         private static readonly ResourceManager _resourceManager
-            = new ResourceManager("Kdbndp.EntityFrameworkCore.KingbaseES.Properties.KdbndpStrings", typeof(KdbndpStrings).Assembly);
+            = new ResourceManager("DotNetCore.EntityFrameworkCore.KingbaseES.Properties.KdbndpStrings", typeof(KdbndpStrings).Assembly);
 
         /// <summary>
         ///     Using two distinct data sources within a service provider is not supported, and Entity Framework is not building its own internal service provider. Either allow Entity Framework to build the service provider by removing the call to '{useInternalServiceProvider}', or ensure that the same data source is used for all uses of a given service provider passed to '{useInternalServiceProvider}'.
@@ -201,7 +201,7 @@ namespace Kdbndp.EntityFrameworkCore.KingbaseES.Internal
     public static class KdbndpResources
     {
         private static readonly ResourceManager _resourceManager
-            = new ResourceManager("Kdbndp.EntityFrameworkCore.KingbaseES.Properties.KdbndpStrings", typeof(KdbndpResources).Assembly);
+            = new ResourceManager("DotNetCore.EntityFrameworkCore.KingbaseES.Properties.KdbndpStrings", typeof(KdbndpResources).Assembly);
 
         /// <summary>
         ///     Enum column '{name}' cannot be scaffolded, define a CLR enum type and add the property manually.
