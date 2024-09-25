@@ -11,5 +11,21 @@ namespace KingbaseES.BasicTest
         public int Id { get; set; }
         [Column("name")]
         public string Name { get; set; }
+        public DateTime CreatedDateTime { get; set; }
+
+        public Author Author { get; set; }
+
+
+    }
+
+    public class Author
+    {
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
+        [Column("name")]
+        public string Name { get; set; }
+
+        public DateTime BirthTime { get; set; }
     }
 }

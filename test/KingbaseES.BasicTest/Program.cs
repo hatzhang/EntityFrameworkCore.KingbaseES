@@ -1,4 +1,4 @@
-﻿namespace KingbaseES.BasicTest;
+namespace KingbaseES.BasicTest;
 
 internal static class Program
 {
@@ -28,9 +28,17 @@ internal static class Program
             Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "清理完成！");
             Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "当前 Blogs 表中条目数：" + blogs.Count);
         }
+        var authors = context.Authors.ToList();
+        if (authors.Any())
+        {
+            context.Authors.RemoveRange(authors);
+            context.SaveChanges();
+        }
         //add
         Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "新增 Blog 实体 值为I love EFCore!");
-        context.Add(new Blog() { Name = "I love EFCore!" });
+        var author = new Author() { BirthTime = DateTime.Parse("2000/09/10"), Name = "Li" };
+
+        context.Add(new Blog() { Name = "I love EFCore!" ,CreatedDateTime = DateTime.Now, Author = author });
         var result = context.SaveChanges();
 
         //update
@@ -42,8 +50,20 @@ internal static class Program
         context.SaveChanges();
 
         // get
-        var testselect = context.Blogs.FirstOrDefault();
-        Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "查询结果:" + testselect.Name);
+        var query = (from b in context.Blogs
+             group b by new
+             {
+                 b.Name,
+                 BirthYearMonth = new {b.Author.BirthTime.Year,b.Author.BirthTime.Month}
+             }
+             into g
+             select new
+             {
+                 NamedBirth = g.Key,
+                 BlogCount = g.Count()
+             })
+            .ToList();
+       
         Console.ReadKey();
     }
 }
