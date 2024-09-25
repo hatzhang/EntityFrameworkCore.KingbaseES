@@ -1,4 +1,4 @@
-﻿namespace KingbaseES.BasicTest;
+namespace KingbaseES.BasicTest;
 
 internal static class Program
 {
@@ -30,7 +30,7 @@ internal static class Program
         }
         //add
         Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "新增 Blog 实体 值为I love EFCore!");
-        context.Add(new Blog() { Name = "I love EFCore!" });
+        context.Add(new Blog() { Name = "I love EFCore!" ,BlogType = BlogType.Company});
         var result = context.SaveChanges();
 
         //update
@@ -42,7 +42,8 @@ internal static class Program
         context.SaveChanges();
 
         // get
-        var testselect = context.Blogs.FirstOrDefault();
+        var filter = new BlogFilter() { Type = new[] { BlogType.Company } };
+        var testselect = context.Blogs.FirstOrDefault(q=>filter.Type.Contains(q.BlogType));
         Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "查询结果:" + testselect.Name);
         Console.ReadKey();
     }
